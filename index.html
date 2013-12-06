@@ -25,15 +25,15 @@
             Pop up
         </div>
         <button id="return"  value="return" class="popUp_open">pop</button>
-
+        <button id="play"  value="play">play</button>
         <script>
             $(function() {
                 $('#popUp').popup({
                     'autoopen': false,
                     'autozindex': true,
                     onopen: function() {
- ws.send("toto");
-console.log("ping");
+                        ws.send("toto");
+                        console.log("ping");
                     },
                     onclose: function() {
                     }
