@@ -1,7 +1,11 @@
 var LC = 0; //clock virtuelle du jeu 
 var map = [[]];
 var timeRate = 1000;
-var gridmap = createMatrix(20,10);
+var rows = 20;
+var cols = 20;
+var gridmap = createMatrix(rows, cols);
+var vitesseBullet = 1;
+var vitesseNinja = 4;
 
 var WebSocketServer = require('ws').Server
         , http = require('http')
@@ -43,11 +47,11 @@ wss.on('connection', function(ws) {
     });
 });
 
-function echanger (sx,sy,fx,fy){
+function echanger(sx, sy, fx, fy) {
     var ech = gridmap.map[fx].columns[fy];
-    gridmap.map[fx].columns[fy] =  gridmap.map[fx].columns[sy];
-    gridmap.map[sx].columns[sy]=  ech;
-    
+    gridmap.map[fx].columns[fy] = gridmap.map[fx].columns[sy];
+    gridmap.map[sx].columns[sy] = ech;
+
 }
 
 function addSanta(id) {
@@ -69,6 +73,28 @@ function createMatrix(sx, sy) {
     return {"map": arr};
 }
 
-function updateMap(){
-    
+function updateMap() {
+    console.log("LC="+ LC)
+    for (var i = rows-1; i > 0; i--) {
+        for (var j = cols-1; j > 0; j--) {
+            gridmap.map[i].columns[j].clock++;
+
+            //cas ninja:
+            if (gridmap.map[i].columns[j].type === "obstacle") {
+                if (gridmap.map[i].columns[j].clock >= vitesseNinja) {
+                    gridmap.map[i].columns[j].clock = 0;
+                    //kill santa
+                    if (gridmap.map[i].columns[j + 1].type === "santa") {
+                        santadeath(gridmap.map[i].columns[j + 1].id);
+                    }
+                    echanger(i, j, i, j + 1);
+                }
+            }
+        }
+    }
+}
+
+function santadeath(ID, i, j) {
+    gridmap.map[i].columns[j] = {"id": j, "lvl": 0, "type": "vide", "clock": 0, "img": ""};
+    console.log('== Santa death ' + ID);
 }
