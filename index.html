@@ -26,20 +26,28 @@
         </div>
         <button id="return"  value="return" class="popUp_open">pop</button>
 
+        <div id="game">
+            <canvas id="canvasGame"> 
+                Texte alternatif pour les navigateurs ne supportant pas Canvas.
+            </canvas>
+        </div>
+
+
         <script>
             $(function() {
                 $('#popUp').popup({
                     'autoopen': false,
                     'autozindex': true,
                     onopen: function() {
- ws.send("toto");
-console.log("ping");
+                        ws.send("toto");
+                        console.log("ping");
                     },
                     onclose: function() {
                     }
                 });
             });
         </script>
+        <script src="gameClient.js"></script>
         <script>
             init();
         </script>
