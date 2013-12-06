@@ -1,9 +1,8 @@
 {
-  "name": "node-ws-canar",
+  "name": "node-example",
   "version": "0.0.1",
   "dependencies": {
-    "ws": "0.4.x",
-    "express": "3.x"
+    "express": "3.1.x"
   },
   "engines": {
     "node": "0.10.x",

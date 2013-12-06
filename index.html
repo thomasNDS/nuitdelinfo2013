@@ -10,14 +10,13 @@
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
         <!--Jquery-->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <!--Websockets-->
-        <script src="/socket.io/socket.io.js"></script>
         <!--notre implémentation des websockets-->
         <script src="js/communication.js"></script>
         <!--Pour les popUps-->
         <script src="js/popoUpJquery.js"></script>
         <!--Isotope pour les layout-->
         <script src="js/lib/isotope.min.js"></script>
+
     </head>
 
     <body style="text-align: center;">
@@ -33,6 +32,8 @@
                     'autoopen': false,
                     'autozindex': true,
                     onopen: function() {
+ ws.send("toto");
+console.log("ping");
                     },
                     onclose: function() {
                     }
